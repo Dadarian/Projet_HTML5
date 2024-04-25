@@ -1,0 +1,62 @@
+<!DOCTYPE html> 
+<head>
+    <meta charset="UTF-8">
+    <title>Cercle bleu</title>
+    <style>
+        canvas {
+            background: white;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = 1700;
+        canvas.height = 600;
+
+        // Propriétés du cercle
+        let circle = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            radius: 50,
+            color: 'blue',
+            speed: 10 
+        };
+
+        // Dessiner le cercle
+        function drawCircle() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = circle.color;
+            ctx.beginPath();
+            ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2, true);
+            ctx.fill();
+        }
+
+        //déplacer le cercle
+        window.addEventListener('keydown', function(event) {
+            switch(event.keyCode) {
+                case 37: //flèche gauche
+                    circle.x -= circle.speed;
+                    break;
+                case 39: //flèche droite
+                    circle.x += circle.speed;
+                    break;
+                case 38: //Flèche haut
+                    circle.y -= circle.speed;
+                    break;
+                case 40: //Flèche bas
+                    circle.y += circle.speed;
+                    break;
+            }
+            drawCircle(); 
+        });
+
+        drawCircle();
+    </script>
+</body>
+</html>
